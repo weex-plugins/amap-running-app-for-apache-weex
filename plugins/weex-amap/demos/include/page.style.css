@@ -1,0 +1,44 @@
+.container{
+    position: relative;
+    flex:1;
+    background-color: #fff;
+  }
+  .map{
+    flex: 1;
+    position: relative;
+    background-color: #fff;
+    min-height: 800;
+    border-bottom-width: 10;
+    border-bottom-color: #fff;
+  }
+  .map-control{
+    padding-top: 20;
+    min-height: 600;
+  }
+  .title{
+    margin-left: 20;
+    padding-left: 20;
+    padding-top: 10;
+    padding-bottom: 10;
+    font-size: 36px;
+    border-left-width: 6;
+    border-left-color: #0f89f5;
+    color: #222;
+    text-align: left;
+  }
+  .tips{
+    margin: 20;
+    padding: 10;
+    color:#666;
+    font-size: 20px;
+  }
+  .btn{
+    margin: 20;
+    padding: 20;
+    background-color: #1ba1e2;
+    border-radius: 5;
+    color: #fff; 
+    text-align:center;
+    cursor: pointer;
+    font-size: 28px;
+  }

@@ -1,0 +1,32 @@
+<template>
+  <div class="unit-box">
+    <text class="unit-number" style="font-size:{{numberSize}}">{{number}}</text>
+    <text class="unit-text">{{label}}</text>
+  </div>
+  
+</template>
+
+
+<style>
+.unit-box{
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+.unit-number {
+  display: inline-block;
+  font-size: 50;
+  color: #111;
+}
+.unit-text{
+  font-size: 22;
+  color: #333;
+  padding-left: 20;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+</style>
+
+<script>
+  export default {};
+</script>

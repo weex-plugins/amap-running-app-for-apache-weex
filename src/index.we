@@ -1,39 +1,126 @@
 <template>
   <div class="container">
-      <image src="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/7d42775b8f0d0c86589082dc9ee179c2.png" class="bannar-image"/>
-      <text class="message">{{ message }}</text>
-      <text class="quotes">{{ quotes }}</text>    
+    <navbar hide-return="true" title="weex-sports"></navbar>
+    <text class="title">我的运动</text>
+    <div class="data-container">
+      <div class="data-circle">
+        <weex-percentage-circle border-width="8" color="#e74c3c" percent="60" radius="150">
+        </weex-percentage-circle>
+      </div>
+      <div class="data-dashboard">
+        <div class="data-dashboard-item">
+          <text class="data-dashboard-label">距离</text>
+          <unit number="{{total.distance}}" label="公里"></unit>
+        </div>
+        <div class="data-dashboard-item">
+          <text class="data-dashboard-label">热量</text>
+          <unit number="{{total.calories}}" label="卡路里"></unit>
+        </div>
+        <div class="data-dashboard-item">
+          <text class="data-dashboard-label">时间</text>
+          <unit number="{{total.time}}" label="分钟"></unit>
+        </div>
+      </div>
+    </div>
+    <div class="history-center">
+      <text>历史记录</text>
+      <list data="{{historyData}}"></list>
+    </div>
+    
+    <text class="footer">Powered By Weex</text>
   </div>
 </template>
 
 <style>
   .container{
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    flex: 1;
+    min-height: 800;
+    background-color: #eee;
+  }
+  .title {
+    font-size: 45;
+    padding: 20;
+    justify-content: center;
+    align-items: center;
+    color: #e74c3c;
+    background-color: #fff;
+  }
+  .data-container{
+    padding: 20;
+    border-bottom-color: #ddd;
+    border-bottom-width: 2;
+    background-color: #fff;
+    justify-content: center;
+  }
+  .data-circle{
     align-items: center;
   }
-
-  .bannar-image{
-    width:200;
-    height:200;
+  .data-dashboard{
+    border-top-color: #ddd;
+    border-top-width: 2;
+    margin-top: 20;
+    flex-direction: row;
   }
-  .message{
+  .data-dashboard-item{
+    flex:1;
+    align-items: center;
+  }
+  .data-dashboard-label{
+    font-size: 24;
+    color: #999;
     padding-top: 20;
-    padding-bottom: 40;
-    color: #0055dd;
-    font-size: 28; 
+    padding-top: 20;
   }
-  .quotes{
+  
+  .history-center{
+    padding: 20;
+    margin-top: 40;
+    margin-bottom: 20;
+    background-color: #fff;
+    border-bottom-color: #ddd;
+    border-bottom-width: 2;
+  }
+  
+  
+  
+  .footer{
     font-size: 16;
-    color:#666; 
+    color: #999;
+    padding: 20;
+    align-items: center;
   }
+  
 </style>
 
 <script>
+  require('weex-percentage-circle')
+  require('./include/navbar.we');
+  require('./include/unit.we');
+  require('./include/list.we');
   module.exports = {
     data: {
-      message: 'Welcome to Use Weexpack!',
-      quotes: 'A Tool To Build WEEX Faster',
+      total: {
+        distance: 7.02,
+        calories: 182,
+        time: 120,
+      },
+      plan: {
+        distance: 15.8
+      },
+      historyData: [
+        {
+          distance: 12,
+          time: 30.2,
+          date: '2017-03-15'
+        },
+        {
+          distance: 12,
+          time: 30.2,
+          date: '2017-03-15'
+        }
+      ]
+      
     }
   }
 </script>

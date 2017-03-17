@@ -1,0 +1,63 @@
+<template>
+  <div class="navbar-con">
+    <div class="navbar">
+      <div class="btn-back" onclick="goHome">
+        <image class="btn-arrow-left" src="http://img1.vued.vanthink.cn/vued9c8e7e738ff94abee23eb69d7f1401e9.png"></image>
+        <text class="btn-text">返回</text>
+      </div>
+      <text class="title">{{title}}</text>
+    </div>
+  </div>
+</template>
+<style>
+  .navbar-con{
+    height: 108;
+    padding-top: 20;
+  }
+  .navbar{
+    z-index: 1000;
+    position: relative;
+    display:flex;
+    flex-direction: row;
+    height: 88;
+    background-color: #fff;
+    align-items: center;
+    border-bottom-width: 2;
+    border-bottom-color: #ddd;
+  }
+  .btn-back{
+    z-index: 1002;
+    flex-direction: row;
+    align-items: center;
+    width: 180;
+    height: 88;
+  }
+  .btn-arrow-left{
+    width: 60;
+    height: 60;
+    margin-left: 10;
+  }
+  .btn-text{
+    color: #0f89f5;
+  }
+  .title{
+    position: absolute;
+    left:180;
+    right:180;
+    top:0;
+    height: 88;
+    line-height: 88;
+    font-size: 36;
+    text-align: center;
+  }
+</style>
+<script>
+  const navigator = require('@weex-module/navigator');
+  module.exports = {
+    methods: {
+      goHome() {
+        navigator.pop();
+      }
+    }   
+  }
+</script>

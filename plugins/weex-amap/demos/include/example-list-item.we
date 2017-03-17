@@ -1,0 +1,85 @@
+<template>
+  <div class="item" onclick="redirect">
+    <image class="item-bannar" src="{{imgsrc}}"></image>
+    <div class="item-desc">
+      <div class="inner">
+        <text class="keyword">{{keyword}}</text>
+        <text class="details">{{desc}}</text>
+      </div>
+      <div class="btn-wrap">
+        <text class="btn">查看详情</text>
+      </div>
+      
+    </div>
+  </div>
+</template>
+
+<style>
+  .item{
+    height: 460;
+    margin: 40;
+    margin-top: 20;
+    background-color: #fff;
+    border-width:1;
+    border-bottom-width: 2;
+    border-color: rgba(0,0,0,.2);
+  }
+  .item-bannar{
+    height: 300;
+    border-width: 10;
+    border-color: #fff;
+  }
+  .item-desc {
+    flex: 1;
+    flex-direction: row;
+    padding-top: 15px;
+    font-size: 36px;
+    color: #555;
+    text-align: center;
+  }
+  .inner{
+    flex:0.7;
+    flex-direction: column;
+    padding-left: 10;
+    align-items: flex-start;
+  }
+  .keyword{
+    font-size: 40px;
+    color: #1995f9;
+  }
+  .details{
+    margin-top: ;
+    font-size: 24px;
+    color: #333;
+  }
+  .btn-wrap{
+    flex:0.4;
+    justify-content: center;
+    align-self: right;
+  }
+  .btn{
+    align-self: center;
+    margin-left: 10;
+    display: inline-block;
+    background-color: #1995f9;
+    color: #fff;
+    padding: 20;
+    padding-top: 10;
+    padding-bottom: 10;
+    border-radius: 30; 
+    font-size: 24px;
+  }
+</style>
+
+<script>
+  const navigator = require('@weex-module/navigator');
+  module.exports = {
+    methods: {
+      redirect: function() {
+        navigator.push({
+          url: this.url
+        });
+      }
+    }
+  }
+</script>

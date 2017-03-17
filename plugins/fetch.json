@@ -1,0 +1,10 @@
+{
+    "weex-amap": {
+        "source": {
+            "type": "local",
+            "path": "../weex-amap"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}

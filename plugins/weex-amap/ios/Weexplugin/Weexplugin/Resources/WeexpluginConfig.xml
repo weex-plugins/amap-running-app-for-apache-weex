@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.taobao.WeexDemo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://*">
+    <name>WeexDemo</name>
+    <description>
+        A sample Weex application that responds to the deviceready event.
+    </description>
+    <author email=" " href="https://alibaba.github.io/weex/">
+        Weex Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="SuppressesLongPressGesture" value="false" />
+    <preference name="Suppresses3DTouchGesture" value="false" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <feature name="WXImgLoaderImpl">
+        <param name="category" value="handler" />
+        <param name="ios-package" value="WXImgLoaderImpl" />
+        <param name="protocol" value="WXImgLoaderProtocol" />
+    </feature>
+    <feature name="WXMapViewComponent">
+        <param name="category" value="component" />
+        <param name="ios-package" value="WXMapViewComponent" />
+        <param name="api" value="weex-amap" />
+    </feature>
+    <feature name="WXMapViewMarkerComponent">
+        <param name="category" value="component" />
+        <param name="ios-package" value="WXMapViewMarkerComponent" />
+        <param name="api" value="weex-amap-marker" />
+    </feature>
+    <feature name="WXMapPolylineComponent">
+        <param name="category" value="component" />
+        <param name="ios-package" value="WXMapPolylineComponent" />
+        <param name="api" value="weex-amap-polyline" />
+    </feature>
+    <feature name="WXMapPolygonComponent">
+        <param name="category" value="component" />
+        <param name="ios-package" value="WXMapPolygonComponent" />
+        <param name="api" value="weex-amap-polygon" />
+    </feature>
+    <feature name="WXMapCircleComponent">
+        <param name="category" value="component" />
+        <param name="ios-package" value="WXMapCircleComponent" />
+        <param name="api" value="weex-amap-circle" />
+    </feature>
+    <feature name="WXMapInfoWindowComponent">
+        <param name="category" value="component" />
+        <param name="ios-package" value="WXMapInfoWindowComponent" />
+        <param name="api" value="weex-amap-info-window" />
+    </feature>
+    <feature name="WXMapViewModule">
+        <param name="category" value="module" />
+        <param name="ios-package" value="WXMapViewModule" />
+        <param name="api" value="amap" />
+    </feature>
+    
+</widget>

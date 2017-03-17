@@ -1,0 +1,40 @@
+<template>
+  <div class="list">
+    <div class="item" repeat="item in data">
+      <div class="item-distance">
+        <unit number="{{item.distance}}" label="千米"></unit>
+      </div>
+      <div class="item-time-info">
+        <unit style="flex:1;" number-size="24" number="{{item.time}}" label="分钟"></unit>
+        <unit style="flex:1" number-size="24" number="{{item.date}}" label=""></unit>
+      </div>
+    </div>    
+  </div>
+</template>
+
+<style>
+  .item{
+    padding: 20;
+    border-top-width: 1;
+    border-top-color: #ccc;
+    flex-direction: row;
+  }
+  .item-distance{
+    flex:1;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .item-time-info{
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  
+</style>
+
+<script>
+require('./unit.we');
+export default {};  
+</script>
+

@@ -1,0 +1,70 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "WeexpluginConfig.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"WXImgLoaderImpl\"><param name=\"category\" value=\"handler\" /><param name=\"ios-package\" value=\"WXImgLoaderImpl\" /><param name=\"protocol\" value=\"WXImgLoaderProtocol\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapViewComponent\"><param name=\"category\" value=\"component\" /><param name=\"ios-package\" value=\"WXMapViewComponent\" /><param name=\"api\" value=\"weex-amap\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapViewMarkerComponent\"><param name=\"category\" value=\"component\" /><param name=\"ios-package\" value=\"WXMapViewMarkerComponent\" /><param name=\"api\" value=\"weex-amap-marker\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapViewModule\"><param name=\"category\" value=\"module\" /><param name=\"ios-package\" value=\"WXMapViewModule\" /><param name=\"api\" value=\"amap\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "NSCameraUsageDescription": [
+                        {
+                            "xml": "<string> </string>",
+                            "count": 1
+                        }
+                    ],
+                    "NSPhotoLibraryUsageDescription": [
+                        {
+                            "xml": "<string> </string>",
+                            "count": 1
+                        }
+                    ],
+                    "NSLocationWhenInUseUsageDescription": [
+                        {
+                            "xml": "<string />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "weex-adapter-image": {
+            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        },
+        "weex-plugin-amap": {
+            "CAMERA_USAGE_DESCRIPTION": " ",
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [],
+    "plugin_metadata": {
+        "weex-adapter-image": "1.0.1",
+        "weex-plugin-amap": "1.0.0"
+    }
+}

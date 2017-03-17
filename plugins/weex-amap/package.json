@@ -1,0 +1,35 @@
+{
+  "name": "weex-plugin--weex-plugin-amap",
+  "version": "1.0.0",
+  "platform": [
+    "ios"
+  ],
+  "main": "./js/index.we",
+  "description": "weex amap component",
+  "keywords": [
+    "weex",
+    "amap",
+    "mapview"
+  ],
+  "scripts": {
+    "eslint": "eslint"
+  },
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-html": "^1.7.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-react": "^6.9.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "jasmine": "^2.5.3",
+    "karma": "^1.4.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0"
+  }
+}

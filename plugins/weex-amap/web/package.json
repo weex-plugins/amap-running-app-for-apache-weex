@@ -1,0 +1,15 @@
+{
+    "name": "weex-plugin--weex-plugin-amap",
+    "version": "1.0.0",
+    "platform": [
+        "web"
+    ],
+    "main": "./index.js",
+    "description": "weex amap component",
+    "keywords": [
+        "weex",
+        "amap",
+        "mapview"
+    ],
+    "license": "Apache 2.0"
+}

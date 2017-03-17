@@ -1,0 +1,170 @@
+<template>
+  <div class="container">
+    <weex-amap class="map" sdk-key="{{keys}}" zoom="{{zoom}}"></weex-amap>
+    <div class="map-controller">
+      <div class="distance-wrap">
+        <text class="distance">{{runningData.distance}}</text>
+        <text class="unit">公里</text>
+      </div>
+      <div class="dashboard">
+        <div class="dashboard-item">
+          <div class="time-wrap">
+            <text class="dashboard-title">运动时间</text>
+            <text class="number-lg">{{runningData.time}}</text>
+          </div>
+        </div>
+        <div class="dashboard-item">
+          <text class="dashboard-title">配速</text>
+          <text class="number-lg">{{runningData.speed}}</text>
+        </div>
+        <div class="dashboard-item">
+          <text class="dashboard-title">热量</text>
+          <text class="number-lg">{{runningData.calories}}</text>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <div class="btn-circle btn-red">
+          <text class="btn-text">开始</text>
+        </div>
+        <div class="btn-circle btn-green">
+          <text class="btn-text">暂停</text>
+        </div>
+      </div>
+    </div>
+    <div class="top-message">
+      <image class="loading-gif" src="http://img1.vued.vanthink.cn/vuedf072471d0b97d612282d1ce010cb1de1.gif"></image>
+      <text class="top-message-text">{{message}}</text>
+    </div>
+  </div>
+</template>
+
+<style>
+  .container{
+    position: relative;
+    flex: 1;
+    min-height: 600;
+    background-color: #eee;
+  }
+  .map{
+    flex: 1;
+    min-height: 600;
+  }
+  .map-controller{
+    z-index: 2000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 500;
+    background-color: rgba(255,255,255,1);
+    border-top-width: 2;
+    border-top-color: rgba(0,0,0,.25);
+  }
+  .distance-wrap{
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .distance {
+    display: inline-block;
+    font-size: 90;
+    color: #111;
+  }
+  .unit{
+    font-size: 22;
+    color: #333;
+    padding-top: 30;
+    padding-left: 20;
+  }
+  .dashboard{
+    flex: 1;
+    flex-direction: row;
+  }
+  .dashboard-title{
+    color: #999;
+    font-size: 25;
+    margin-bottom: 20;
+  }
+  .dashboard-item{
+    flex:1;
+    padding-left: 40;
+    justify-content: center;
+  }
+  .number-lg{
+    font-size: 42;
+    color: #222;
+  }
+  
+  .btn-wrap{
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-circle {
+    width: 120;
+    height: 120;
+    margin-left: 40;
+    margin-right: 40;
+    border-radius: 120;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+  }
+  .btn-text{
+    color:#fff;
+    font-size: 20;
+  }
+  .btn-red{
+    background-color: #ff626d;
+  }
+  .btn-green{
+    background-color: #21d45f;
+  }
+  
+  
+  .top-message{
+    z-index: 2001;
+    position: absolute;
+    left:30;
+    top:30;
+    height: 60;
+    border-radius: 30;
+    padding-left: 30;
+    padding-right: 30;
+    background-color: #fff;
+    flex-direction: row;
+    align-items: center;
+  }
+  .top-message-text {
+    font-size: 20;
+  }
+  .loading-gif{
+    width: 30;
+    height: 30;
+  }
+</style>
+
+<script>
+  
+  module.exports = {
+    data: {
+      keys: {
+        h5:'f4b99dcd51752142ec0f1bdcb9a8ec02',
+        ios: '',
+        android: 'db6a973159cb0c2639ad02c617a786ae'
+      },
+      zoom: 15,
+      runningData: {
+        distance: 0,
+        time: '00:00:00',
+        Seconds: 0,
+        speed: 0,
+        calories: 0
+      },
+      message: '正在运行'
+      
+    }
+  }
+</script>

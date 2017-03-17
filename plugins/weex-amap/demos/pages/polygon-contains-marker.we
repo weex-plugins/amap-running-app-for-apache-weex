@@ -1,0 +1,133 @@
+<template>
+  <div class="container">
+    <navbar title="多边形包含判断"></navbar>
+    <weex-amap class="map" id="map2017" sdk-key={{keys}} zoom={{zoom}} center={{pos}}>
+      <weex-amap-polygon id="polygon-2017" path="{{path}}" fill-color="#2ecc71"></weex-amap-polygon>
+      <weex-amap-marker position="{{marker.position}}" title="{{marker.title}}"></weex-amap-marker>
+      <weex-amap-marker position="{{marker2.position}}" title="{{marker2.title}}"></weex-amap-marker>
+    </weex-amap>
+    <div class="map-control">
+      <text class="title">Method: polygonContainsMarker</text> 
+      <text class="tips">判断多边形是不是包含某个点</text>
+      <div onclick="test" class="btnbox"><text class="btn" >Test Marker1</text></div>
+      <div onclick="test2" class="btnbox"><text class="btn" >Test Marker2</text></div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .container{
+    position: relative;
+    flex:1; 
+    background-color: #fff;
+  }
+  .map{
+    flex: 1;
+    position: relative;
+    background-color: #fff;
+    min-height: 800;
+    border-bottom-width: 10;
+    border-bottom-color: #fff;
+  }
+  .map-control{
+    padding-top: 20;
+    min-height: 600;
+  }
+  .title{
+    margin-left: 20;
+    padding-left: 20;
+    padding-top: 10;
+    padding-bottom: 10;
+    font-size: 36px;
+    border-left-width: 6;
+    border-left-color: #0f89f5;
+    color: #222;
+    text-align: left;
+  }
+  .tips{
+    margin: 20;
+    padding: 10;
+    color:#666;
+    font-size: 20px;
+  }
+  .btn{
+    margin: 20;
+    padding: 20;
+    background-color: #1ba1e2;
+    border-radius: 5;
+    color: #fff; 
+    text-align:center;
+    cursor: pointer;
+    font-size: 28px;
+  }
+  .distance{
+    padding: 5;
+    margin: 20;
+    font-size: 22;
+    background-color: #f1c40f;
+    color: #000;
+  }
+</style>
+
+<script>
+  require('../include/navbar.we');
+  var Amap = null;
+  try {
+    Amap = require('@weex-module/amap');
+  } catch(err) {
+    console.log(err);
+  }
+  var modal = require('@weex-module/modal');
+  var path = [
+    [116.403322, 39.920255],
+    [116.410703, 39.897555],
+    [116.402292, 39.892353],
+    [116.389846, 39.891365]
+  ];
+  module.exports = {
+    data: {
+      keys: {
+        h5:'f4b99dcd51752142ec0f1bdcb9a8ec02',
+        ios: '',
+        android: 'db6a973159cb0c2639ad02c617a786ae'
+      },
+      pos: [116.397428, 39.90923],
+      path: path,
+      zoom: 13,
+      marker: {
+        position: [116.368904, 39.923423],
+        title: 'a marker'
+      },
+      marker2: {
+        position: [116.403322, 39.897555],
+        title: 'another marker'
+      }
+    },
+    
+    methods: {
+      test() {
+        Amap.polygonContainsMarker(this.marker.position, this.$el('polygon-2017').ref, (res) => {
+          this.handleRes(res);
+        });
+      },
+      
+      test2() {
+        Amap.polygonContainsMarker(this.marker2.position, this.$el('polygon-2017').ref, (res) => {
+          this.handleRes(res);
+        });
+      },
+      
+      handleRes(res) {
+        let msg = '标记点';
+        if(res.result === 'success' && res.data) {
+          msg += '存在';
+        } else {
+          msg += '不存在';
+        }
+        modal.alert({
+          message: '标记点' + msg
+        }); 
+      }
+    }
+  }
+</script>

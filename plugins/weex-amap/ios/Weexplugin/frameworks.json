@@ -1,0 +1,5 @@
+{
+    "ImageIO.framework": 2,
+    "CoreLocation.framework": 2,
+    "AVFoundation.framework": 2
+}
