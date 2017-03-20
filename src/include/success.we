@@ -1,0 +1,106 @@
+<template>
+  <div class="success">
+    <div class="success-data">
+      <div class="distance-wrap">
+        <text class="distance">{{data.miles}}</text>
+        <text class="unit">公里</text>
+      </div>
+      <div class="dashboard">
+        <div class="dashboard-item">
+          <div class="time-wrap">
+            <text class="dashboard-title">运动时间</text>
+            <text class="number-lg">{{data.time}}</text>
+          </div>
+        </div>
+        <div class="dashboard-item">
+          <text class="dashboard-title">热量</text>
+          <text class="number-lg">{{data.calories}}</text>
+        </div>
+      </div>
+    </div>
+    <div style="align-items:center">
+      <div class="btn-leave" onclick="pop">
+        <text class="btn-leave-text">确认完成</text>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<style>
+.success{
+  z-index: 2001;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,.85);
+  justify-content: center;
+}
+.distance-wrap{
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.distance {
+  display: inline-block;
+  font-size: 220;
+  color: #fff;
+}
+.unit{
+  font-size: 22;
+  color: #ccc;
+  padding-top: 30;
+  padding-left: 20;
+}
+.dashboard{
+  flex-direction: row;
+  align-items: center;
+}
+.dashboard-title{
+  color: #999;
+  font-size: 25;
+  margin-bottom: 20;
+}
+.dashboard-item{
+  flex:1;
+  padding-left: 40;
+  justify-content: center;
+  align-items: center;
+}
+.number-lg{
+  font-size: 50;
+  color: #fff;
+}
+.btn-leave{
+  width: 400;
+  padding: 20;
+  margin-top: 60;
+  border-width: 4;
+  border-color: #ffffff;
+  align-items: center;
+  border-radius: 10;
+}
+.btn-leave-text{
+  color: #ffffff;
+
+}
+
+</style>
+
+<script>
+  
+  require('./unit.we');
+  const navigator = require('@weex-module/navigator');
+  export default {
+    methods: {
+      pop() {
+        
+        navigator.pop();
+      }
+    }
+    
+  };
+
+</script>

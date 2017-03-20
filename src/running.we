@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <weex-amap class="map" sdk-key="{{keys}}" zoom="{{zoom}}"></weex-amap>
+    <weex-amap id="map2017" center="{{pos}}" class="map" sdk-key="{{keys}}" zoom="{{zoom}}">
+      <weex-amap-polyline path="{{runningData.path}}" stroke-width="3" stroke="#3498db"></weex-amap-polyline>
+    </weex-amap>
     <div class="map-controller">
       <div class="distance-wrap">
-        <text class="distance">{{runningData.distance}}</text>
+        <text class="distance">{{runningData.miles}}</text>
         <text class="unit">公里</text>
       </div>
       <div class="dashboard">
@@ -23,18 +25,27 @@
         </div>
       </div>
       <div class="btn-wrap">
-        <div class="btn-circle btn-red">
+        <div class="btn-circle btn-green" if="{{status==1}}" onclick="start">
           <text class="btn-text">开始</text>
         </div>
-        <div class="btn-circle btn-green">
+        <div class="btn-circle btn-midnight" if="{{status==2 || status == 3}}" onclick="end">
+          <text class="btn-text">结束</text>
+        </div>
+        <div class="btn-circle btn-green" if="{{status==3}}" onclick="continue">
+          <text class="btn-text">继续</text>
+        </div>
+        <div class="btn-circle btn-red" if="{{status==2}}" onclick="stop">
           <text class="btn-text">暂停</text>
         </div>
       </div>
     </div>
-    <div class="top-message">
-      <image class="loading-gif" src="http://img1.vued.vanthink.cn/vuedf072471d0b97d612282d1ce010cb1de1.gif"></image>
-      <text class="top-message-text">{{message}}</text>
+    
+    <div class="countdown-view" if="{{countdown.show}}">
+      <text class="countdown-text">{{countdown.text}}</text>
     </div>
+    <success if="{{status==4}}" data="{{runningData}}"></success>
+    
+    
   </div>
 </template>
 
@@ -44,6 +55,21 @@
     flex: 1;
     min-height: 600;
     background-color: #eee;
+  }
+  .countdown-view{
+    z-index: 2100;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+  }
+  .countdown-text{
+    color: #ff656d;
+    font-size: 120;
   }
   .map{
     flex: 1;
@@ -122,31 +148,20 @@
   .btn-green{
     background-color: #21d45f;
   }
+  .btn-midnight{
+    background-color: #34495e;
+  }
   
   
-  .top-message{
-    z-index: 2001;
-    position: absolute;
-    left:30;
-    top:30;
-    height: 60;
-    border-radius: 30;
-    padding-left: 30;
-    padding-right: 30;
-    background-color: #fff;
-    flex-direction: row;
-    align-items: center;
-  }
-  .top-message-text {
-    font-size: 20;
-  }
-  .loading-gif{
-    width: 30;
-    height: 30;
-  }
 </style>
 
 <script>
+  const utils = require('./lib/utils');
+  const status = require('./lib/status');
+  require('./include/message.we');
+  require('./include/unit.we');
+  require('./include/success.we');
+  const Amap = require('@weex-module/amap');
   
   module.exports = {
     data: {
@@ -155,16 +170,106 @@
         ios: '',
         android: 'db6a973159cb0c2639ad02c617a786ae'
       },
-      zoom: 15,
+      zoom: 16,
+      pos: [],
+      status: status['RUNNING_READY'],
       runningData: {
         distance: 0,
+        miles: 0,
+        path: [],
         time: '00:00:00',
-        Seconds: 0,
+        seconds: 0,
         speed: 0,
-        calories: 0
+        calories: 0,
       },
-      message: '正在运行'
+      message: '正在运行',
+      countdown: {
+        text: '3',
+        show: false,
+      },
+      // two time tricker
+      timeRecorder: null,
+      amapRecorder: null,
       
-    }
+    },
+    
+    methods: {
+      start() {
+        this.status = status.RUNNING_DOING;
+        this.countdown.show = true;
+        this.countDownTime();
+        this.runningAmapGeolocation();
+      },
+      
+      stop() {
+        this.statsu = status.RUNNING_PAUSE;
+        clearInterval(this.timeRecorder);
+        clearInterval(this.amapRecorder);
+      },
+      continue() {
+        this.status = status.RUNNING_DOING;
+        this.countDownTime();
+        this.runningAmapGeolocation();
+      },
+      end() {
+        this.status = status.RUNNING_END;
+        clearInterval(this.timeRecorder);
+        clearInterval(this.amapRecorder);
+      },
+      
+      setUserLocation(callback) {
+        Amap.getUserLocation(this.$el('map2017').ref, callback);
+      },
+      
+      countDownTime() {
+        if (this.status == status.RUNNING_DOING) {
+          this.countdown.show = true;  
+        }
+        this.timeRecorder = setInterval(() => {
+          this.runningData.seconds ++;
+          if(this.runningData.seconds <= 4) {
+            if (this.runningData.seconds == 3) {
+              this.countdown.text = 'GO!';    
+            } else if(this.runningData.seconds == 4) {
+              this.countdown.show = false;
+            } else {
+              this.countdown.text = 3 - this.runningData.seconds;
+            }
+          }
+          this.runningData.time = utils.setTimeFormat(this.runningData.seconds);
+        }, 1000);  
+      },
+      runningAmapGeolocation() {
+        this.setUserLocation((res) => {
+          if(res.result == 'success') {
+            this.pos = res.data.position;
+            this.runningData.path.push(res.data.position);
+          }  
+        }); 
+        this.amapRecorder= setInterval(() => {
+          this.setUserLocation((res) => {
+            if(res.result == 'success') {
+              this.pos = res.data.position;
+              this.runningData.path.push(res.data.position);
+              this.calcDistanceAndSpeed();
+            }
+          });
+        }, 10000);
+      },
+      calcDistanceAndSpeed() {
+        const len = this.runningData.path.length
+        if(len > 1) {
+          Amap.getLineDistance(this.runningData.path[len-1], this.runningData.path[len-2], (res) => {
+            if(res.result == 'success') {
+              this.runningData.distance += res.data.distance;
+              this.runningData.miles = this.runningData.distance.toFixed(2);
+            }
+            this.runningData.calories = (this.runningData.distance / 1000).toFixed(2);
+            this.runningData.speed = utils.calcSpeed(this.runningData.distance, this.runningData.seconds);
+          });
+        }
+      }
+      
+    },
   }
 </script>

@@ -1,0 +1,33 @@
+<template>
+  <div class="message">
+    <image if="{{loading}}" class="loading-gif" src="http://img1.vued.vanthink.cn/vuedf072471d0b97d612282d1ce010cb1de1.gif"></image>
+    <text class="message-text">{{message}}</text>
+  </div>
+</template>
+
+<style>
+.message{
+  z-index: 2001;
+  position: absolute;
+  left:30;
+  top:30;
+  height: 60;
+  border-radius: 30;
+  padding-left: 30;
+  padding-right: 30;
+  background-color: #fff;
+  flex-direction: row;
+  align-items: center;
+}
+.message-text {
+  font-size: 20;
+}
+.loading-gif{
+  width: 30;
+  height: 30;
+}
+</style>
+
+<script>
+  export default {};
+</script>

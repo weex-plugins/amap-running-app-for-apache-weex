@@ -1,0 +1,15 @@
+{
+    "version": "1.0.2",
+    "platform": [
+        "ios"
+    ],
+    "description": "weex image adapter",
+    "keywords": [
+        "weex",
+        "image",
+        "adapter",
+        "handler"
+    ],
+    "license": "Apache 2.0",
+    "name": "weex-plugin-weex-adapter-image"
+}

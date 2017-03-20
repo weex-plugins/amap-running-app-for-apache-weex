@@ -6,7 +6,11 @@
       <div class="data-circle">
         <weex-percentage-circle border-width="8" color="#e74c3c" percent="60" radius="150">
         </weex-percentage-circle>
+        <div class="btn-go" onclick="go">
+          <text class="btn-go-text">开始跑步</text>
+        </div>
       </div>
+      
       <div class="data-dashboard">
         <div class="data-dashboard-item">
           <text class="data-dashboard-label">距离</text>
@@ -53,8 +57,23 @@
     background-color: #fff;
     justify-content: center;
   }
+  
   .data-circle{
     align-items: center;
+  }
+  .btn-go{
+    width: 400;
+    padding: 20;
+    margin-top: 60;
+    background-image: linear-gradient(to left, #FF4E50 , #F9D423); 
+    border-width: 4;
+    border-color: #ffffff;
+    border-radius: 40;
+    align-items: center;
+    border-radius: 10;
+  }
+  .btn-go-text{
+    color: #ffffff;
   }
   .data-dashboard{
     border-top-color: #ddd;
@@ -98,6 +117,9 @@
   require('./include/navbar.we');
   require('./include/unit.we');
   require('./include/list.we');
+  const utils = require('./lib/utils');
+  const navigator = require('@weex-module/navigator');
+
   module.exports = {
     data: {
       total: {
@@ -121,6 +143,15 @@
         }
       ]
       
+    },
+    
+    methods: {
+      go() {
+        const url = this.$getConfig().bundleUrl;
+        navigator.push({
+          url: utils.setBundleUrl(url, 'running.js') ,
+        })
+      }
     }
   }
 </script>
