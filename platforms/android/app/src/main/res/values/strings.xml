@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeexApp</string>
+    <string name="app_name">WeexSports</string>
     <string name="dummy_content">Hello
 Weex</string>
     <string name="capture_qrcode_prompt">请将条码置于取景框内扫描</string>

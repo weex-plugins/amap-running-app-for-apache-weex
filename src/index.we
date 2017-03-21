@@ -30,7 +30,7 @@
       <div class="list">
         <div class="item" repeat="item in historyData">
           <div class="item-distance">
-            <unit number="{{item.distance}}" label="千米"></unit>
+            <unit number="{{item.miles}}" label="千米"></unit>
           </div>
           <div class="item-time-info">
             <unit style="flex:1;" number-size="24" number="{{item.time}}" label=""></unit>

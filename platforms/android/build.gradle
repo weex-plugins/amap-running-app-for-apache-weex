@@ -2,8 +2,8 @@
 
 buildscript {
     repositories {
-        // maven { url "http://mvnrepo.alibaba-inc.com/mvn/repository" }
-        mavenCentral()
+        maven { url "http://mvnrepo.alibaba-inc.com/mvn/repository" }
+
         jcenter()
     }
     dependencies {
@@ -22,3 +22,5 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+

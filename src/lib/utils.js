@@ -22,8 +22,8 @@ module.exports = {
   },
   getDate(time) {
     var d = new Date();
-    var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
-    d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    var datestring = d.getFullYear() +  ("0" + d.getDate()).slice(-2) +  + "-" +
+     + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
     return datestring;
   },
   setZero(number) {
@@ -54,7 +54,7 @@ module.exports = {
     const isAndroidAssets = bundleUrl.indexOf('your_current_IP') >= 0 || bundleUrl.indexOf('file://assets/') >= 0;
     const isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
     if (isAndroidAssets) {
-      nativeBase = 'file://assets/';
+      nativeBase = 'file://assets/dist';
     } else if (isiOSAssets) {
       // file:///var/mobile/Containers/Bundle/Application/{id}/WeexDemo.app/
       // file:///Users/{user}/Library/Developer/CoreSimulator/Devices/{id}/data/Containers/Bundle/Application/{id}/WeexDemo.app/
