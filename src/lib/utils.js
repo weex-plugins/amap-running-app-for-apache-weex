@@ -22,7 +22,7 @@ module.exports = {
   },
   getDate(time) {
     var d = new Date();
-    var datestring = d.getFullYear() +  ("0" + d.getDate()).slice(-2) +  + "-" +
+    var datestring = d.getFullYear() + '-' + ('0' + d.getMonth()).slice('-2') + ("0" + d.getDate()).slice(-2) + "-"
      + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
     return datestring;
   },

@@ -31,7 +31,7 @@
         <div class="btn-circle btn-midnight" if="{{status==2 || status == 3}}" onclick="end">
           <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued4174aaf94bc8e9c8d5bceb5efcba1be3.png"></image>
         </div>
-        <div class="btn-circle btn-green" if="{{status==3}}" onclick="continue">
+        <div class="btn-circle btn-green" if="{{status == 3}}" onclick="continue">
           <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued1c495f140208fd912adaded2bac09764.png"></image>
         </div>
         <div class="btn-circle btn-red" if="{{status==2}}" onclick="stop">
@@ -201,20 +201,19 @@
       },
       
       stop() {
-        this.statsu = status.RUNNING_PAUSE;
+        this.status = status.RUNNING_PAUSE;
         clearInterval(this.timeRecorder);
         clearInterval(this.amapRecorder);
       },
       continue() {
-        this.status = status.RUNNING_DOING;
         this.countDownTime();
         this.runningAmapGeolocation();
+        this.status = status.RUNNING_DOING;
       },
       end() {
         clearInterval(this.timeRecorder);
         clearInterval(this.amapRecorder);
         const self = this;
-        console.log(1)
         storage.getItem('runningData', (res) => {
           let data = [];
           if (res.result == 'success') {
@@ -227,7 +226,6 @@
             date: utils.getDate().replace(/\s.+/,''),
             standrandDate: utils.getDate()
           }, self.runningData));
-          console.log(data)
           storage.setItem('runningData', JSON.stringify(data), (res) => {
             if(res.result == 'success') {
               self.status = status.RUNNING_END;    
@@ -280,7 +278,7 @@
         if(len > 1) {
           Amap.getLineDistance(this.runningData.path[len-1], this.runningData.path[len-2], (res) => {
             if(res.result == 'success') {
-              this.runningData.distance += res.data.distance;
+              this.runningData.distance = 1 * this.runningData.distance + res.data.distance;
               this.runningData.miles = utils.kmtom(this.runningData.distance);
             }
             this.runningData.calories = (this.runningData.distance / 1000).toFixed(2);
