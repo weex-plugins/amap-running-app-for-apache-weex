@@ -14,5 +14,7 @@ git clone https://github.com/weex-plugins/amap-running-app
 
 + 进入克隆的项目目录，然后执行 `npm install`
 
+
+
 + 
 

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <weex-amap id="map2017" center="{{pos}}" class="map" sdk-key="{{keys}}" zoom="{{zoom}}">
+    <weex-amap id="map2017" geolocation="true" center="{{pos}}" class="map" sdk-key="{{keys}}" zoom="{{zoom}}">
       <weex-amap-polyline path="{{runningData.path}}" stroke-width="3" stroke="#3498db"></weex-amap-polyline>
     </weex-amap>
     <div class="map-controller">
