@@ -4,13 +4,12 @@
     <text class="title">我的运动</text>
     <div class="data-container">
       <div class="data-circle">
-        <weex-percentage-circle border-width="8" color="#e74c3c" percent="60" radius="150">
+        <weex-percentage-circle border-width="8" color="#e74c3c" percent="70" radius="150">
         </weex-percentage-circle>
         <div class="btn-go" onclick="go">
           <text class="btn-go-text">开始跑步</text>
         </div>
       </div>
-      
       <div class="data-dashboard">
         <div class="data-dashboard-item">
           <text class="data-dashboard-label">距离</text>
@@ -28,7 +27,17 @@
     </div>
     <div class="history-center">
       <text>历史记录</text>
-      <list data="{{historyData}}"></list>
+      <div class="list">
+        <div class="item" repeat="item in historyData">
+          <div class="item-distance">
+            <unit number="{{item.distance}}" label="千米"></unit>
+          </div>
+          <div class="item-time-info">
+            <unit style="flex:1;" number-size="24" number="{{item.time}}" label=""></unit>
+            <unit style="flex:1" number-size="24" number="{{item.date}}" label=""></unit>
+          </div>
+        </div>    
+      </div>
     </div>
     
     <text class="footer">Powered By Weex</text>
@@ -100,7 +109,23 @@
     border-bottom-color: #ddd;
     border-bottom-width: 2;
   }
-  
+  .item{
+    padding: 20;
+    border-top-width: 1;
+    border-top-color: #ccc;
+    flex-direction: row;
+  }
+  .item-distance{
+    flex:1;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .item-time-info{
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
   
   
   .footer{
@@ -119,29 +144,19 @@
   require('./include/list.we');
   const utils = require('./lib/utils');
   const navigator = require('@weex-module/navigator');
+  const storage = require('@weex-module/storage');
 
   module.exports = {
     data: {
       total: {
-        distance: 7.02,
-        calories: 182,
-        time: 120,
+        distance: 0,
+        calories: 0,
+        time: 0,
       },
       plan: {
-        distance: 15.8
+        distance: 30
       },
-      historyData: [
-        {
-          distance: 12,
-          time: 30.2,
-          date: '2017-03-15'
-        },
-        {
-          distance: 12,
-          time: 30.2,
-          date: '2017-03-15'
-        }
-      ]
+      historyData: []
       
     },
     
@@ -151,7 +166,28 @@
         navigator.push({
           url: utils.setBundleUrl(url, 'running.js') ,
         })
-      }
+      },
+      
+    },
+    
+    created() {
+      const self = this;
+      console.log(self);
+      storage.getItem('runningData', function (res) {
+        if (res.result == 'success') {
+          try {
+            let data = JSON.parse(res.data);
+            self.historyData = data;
+            self.total.distance = utils.calcTotal(data, 'miles');
+            self.total.calories = utils.calcTotal(data, 'calories');
+            self.total.time = utils.setTimeFormat(utils.calcTotal(data, 'seconds'));
+            
+          } catch (e) {
+            console.log('parse error ');  
+          }
+        } 
+        
+      });
     }
   }
 </script>

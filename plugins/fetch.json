@@ -1,8 +1,8 @@
 {
     "weex-amap": {
         "source": {
-            "type": "local",
-            "path": "../weex-amap"
+            "type": "registry",
+            "id": "weex-amap"
         },
         "is_top_level": true,
         "variables": {}

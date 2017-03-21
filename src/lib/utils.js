@@ -1,15 +1,50 @@
 module.exports = {
+  calcTotal(arr, k) {
+    let sum = 0;
+    arr.forEach((item) => {
+      if (k) {
+        sum += item[k];
+      } else {
+        sum += item;
+      }
+    });
+    return sum;
+  },
   setTimeFormat(time) {
     const h = this.setZero(Math.floor(time / 3600));
     const i = this.setZero(Math.floor((time % 3600) / 60));
     const s = this.setZero(time % 60);
     return h + ':' + i + ':' + s;
   },
+  
+  kmtom(miles) {
+     return (Math.floor(miles / 1000)).toFixed(2);
+  },
+  getDate(time) {
+    var d = new Date();
+    var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+    d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    return datestring;
+  },
   setZero(number) {
     return number < 10 ? '0' + number : number;
   },
   calcSpeed(distance, time) {
     return ((distance / time) * 3.6).toFixed(2);
+  },
+  extend(obj1, obj2) {
+    for (const p in obj2) {
+      try {
+        if (obj2[p].constructor === Object) {
+          obj1[p] = this.extend(obj1[p], obj2[p]);
+        } else {
+          obj1[p] = obj2[p];
+        }
+      } catch (e) {
+        obj1[p] = obj2[p];
+      }
+    }
+    return obj1;
   },
   setBundleUrl(url, jsFile) {
     const bundleUrl = url;

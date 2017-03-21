@@ -26,16 +26,16 @@
       </div>
       <div class="btn-wrap">
         <div class="btn-circle btn-green" if="{{status==1}}" onclick="start">
-          <text class="btn-text">开始</text>
+          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued1c495f140208fd912adaded2bac09764.png"></image>
         </div>
         <div class="btn-circle btn-midnight" if="{{status==2 || status == 3}}" onclick="end">
-          <text class="btn-text">结束</text>
+          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued4174aaf94bc8e9c8d5bceb5efcba1be3.png"></image>
         </div>
         <div class="btn-circle btn-green" if="{{status==3}}" onclick="continue">
-          <text class="btn-text">继续</text>
+          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued1c495f140208fd912adaded2bac09764.png"></image>
         </div>
         <div class="btn-circle btn-red" if="{{status==2}}" onclick="stop">
-          <text class="btn-text">暂停</text>
+          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vueda7f1efb2c417abd362293071651cfc23.png"></image>
         </div>
       </div>
     </div>
@@ -44,8 +44,6 @@
       <text class="countdown-text">{{countdown.text}}</text>
     </div>
     <success if="{{status==4}}" data="{{runningData}}"></success>
-    
-    
   </div>
 </template>
 
@@ -119,7 +117,7 @@
   }
   .number-lg{
     font-size: 42;
-    color: #222;
+    color: #222222;
   }
   
   .btn-wrap{
@@ -129,8 +127,8 @@
     justify-content: center;
   }
   .btn-circle {
-    width: 120;
-    height: 120;
+    width: 140;
+    height: 140;
     margin-left: 40;
     margin-right: 40;
     border-radius: 120;
@@ -138,9 +136,9 @@
     justify-content: center;
     background-color: #eee;
   }
-  .btn-text{
-    color:#fff;
-    font-size: 20;
+  .btn-icon{
+    width: 60;
+    height: 60;
   }
   .btn-red{
     background-color: #ff626d;
@@ -161,17 +159,18 @@
   require('./include/message.we');
   require('./include/unit.we');
   require('./include/success.we');
+  const storage = require('@weex-module/storage')
   const Amap = require('@weex-module/amap');
-  
+  const modal = require('@weex-module/modal');
   module.exports = {
     data: {
       keys: {
         h5:'f4b99dcd51752142ec0f1bdcb9a8ec02',
-        ios: '',
+        ios: 'c551f83e1e5b19af89c74096f1c0f007',
         android: 'db6a973159cb0c2639ad02c617a786ae'
       },
-      zoom: 16,
-      pos: [],
+      zoom: 18,
+      pos: [116.397428, 39.90923],
       status: status['RUNNING_READY'],
       runningData: {
         distance: 0,
@@ -212,9 +211,29 @@
         this.runningAmapGeolocation();
       },
       end() {
-        this.status = status.RUNNING_END;
         clearInterval(this.timeRecorder);
         clearInterval(this.amapRecorder);
+        const self = this;
+        console.log(1)
+        storage.getItem('runningData', (res) => {
+          let data = [];
+          if (res.result == 'success') {
+             data = res.data;
+          }
+          if (typeof data === 'string') {
+            data = JSON.parse(data);
+          }
+          data.unshift(utils.extend({
+            date: utils.getDate().replace(/\s.+/,''),
+            standrandDate: utils.getDate()
+          }, self.runningData));
+          console.log(data)
+          storage.setItem('runningData', JSON.stringify(data), (res) => {
+            if(res.result == 'success') {
+              self.status = status.RUNNING_END;    
+            };
+          })
+        })
       },
       
       setUserLocation(callback) {
@@ -262,7 +281,7 @@
           Amap.getLineDistance(this.runningData.path[len-1], this.runningData.path[len-2], (res) => {
             if(res.result == 'success') {
               this.runningData.distance += res.data.distance;
-              this.runningData.miles = this.runningData.distance.toFixed(2);
+              this.runningData.miles = utils.kmtom(this.runningData.distance);
             }
             this.runningData.calories = (this.runningData.distance / 1000).toFixed(2);
             this.runningData.speed = utils.calcSpeed(this.runningData.distance, this.runningData.seconds);

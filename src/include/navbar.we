@@ -12,7 +12,6 @@
 <style>
   .navbar-con{
     height: 108;
-    padding-top: 20;
   }
   .navbar{
     z-index: 1000;

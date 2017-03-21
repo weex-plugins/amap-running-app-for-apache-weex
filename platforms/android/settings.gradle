@@ -1,0 +1,4 @@
+// GENERATED FILE - DO NOT EDIT
+include ":app"
+include ":weexplugin"
+include ":appframework"

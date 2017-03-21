@@ -1,0 +1,118 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"WXMapViewComponent\"><param name=\"category\" value=\"component\" /><param name=\"android-package\" value=\"com.alibaba.weex.amap.component.WXMapViewComponent\" /><param name=\"api\" value=\"weex-amap\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapMarkerComponent\"><param name=\"category\" value=\"component\" /><param name=\"android-package\" value=\"com.alibaba.weex.amap.component.WXMapMarkerComponent\" /><param name=\"api\" value=\"weex-amap-marker\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapViewComponent\"><param name=\"category\" value=\"component\" /><param name=\"android-package\" value=\"com.alibaba.weex.amap.component.WXMapInfoWindowComponent\" /><param name=\"api\" value=\"weex-amap-info-window\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapMarkerComponent\"><param name=\"category\" value=\"component\" /><param name=\"android-package\" value=\"com.alibaba.weex.amap.component.WXMapCircleComponent\" /><param name=\"api\" value=\"weex-amap-circle\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapViewComponent\"><param name=\"category\" value=\"component\" /><param name=\"android-package\" value=\"com.alibaba.weex.amap.component.WXMapPolyLineComponent\" /><param name=\"api\" value=\"weex-amap-polyline\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapMarkerComponent\"><param name=\"category\" value=\"component\" /><param name=\"android-package\" value=\"com.alibaba.weex.amap.component.WXMapPolygonComponent\" /><param name=\"api\" value=\"weex-amap-polygon\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WXMapModule\"><param name=\"category\" value=\"module\" /><param name=\"android-package\" value=\"com.alibaba.weex.amap.module.WXMapModule\" /><param name=\"api\" value=\"amap\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CHANGE_CONFIGURATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<service android:name=\"com.amap.api.location.APSService\"></service>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "weex-adapter-image": {
+            "PACKAGE_NAME": "com.alibaba.weex"
+        },
+        "weex-amap": {
+            "PACKAGE_NAME": "com.alibaba.weex"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [],
+    "plugin_metadata": {
+        "weex-adapter-image": "1.0.2",
+        "weex-amap": "0.0.2"
+    }
+}

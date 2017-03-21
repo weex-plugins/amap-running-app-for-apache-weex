@@ -19,7 +19,7 @@
 -->
 
 <plugin id="weex-amap"
-        version="0.0.1"
+        version="0.0.2"
         xmlns="http://apache.org/weexpack/ns/plugins/1.0">
     <name>weex-amap</name>
     <description>weex mapview component</description>

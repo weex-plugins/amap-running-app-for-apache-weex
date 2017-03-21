@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.example.myapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets">
+    <name>Weex</name>
+    <description>
+        A sample Weex application.
+    </description>
+    <author email="" href="">
+        Weex Team
+    </author>
+    <feature name="WXMapViewComponent">
+        <param name="category" value="component" />
+        <param name="android-package" value="com.alibaba.weex.amap.component.WXMapViewComponent" />
+        <param name="api" value="weex-amap" />
+    </feature>
+    <feature name="WXMapMarkerComponent">
+        <param name="category" value="component" />
+        <param name="android-package" value="com.alibaba.weex.amap.component.WXMapMarkerComponent" />
+        <param name="api" value="weex-amap-marker" />
+    </feature>
+    <feature name="WXMapViewComponent">
+        <param name="category" value="component" />
+        <param name="android-package" value="com.alibaba.weex.amap.component.WXMapInfoWindowComponent" />
+        <param name="api" value="weex-amap-info-window" />
+    </feature>
+    <feature name="WXMapMarkerComponent">
+        <param name="category" value="component" />
+        <param name="android-package" value="com.alibaba.weex.amap.component.WXMapCircleComponent" />
+        <param name="api" value="weex-amap-circle" />
+    </feature>
+    <feature name="WXMapViewComponent">
+        <param name="category" value="component" />
+        <param name="android-package" value="com.alibaba.weex.amap.component.WXMapPolyLineComponent" />
+        <param name="api" value="weex-amap-polyline" />
+    </feature>
+    <feature name="WXMapMarkerComponent">
+        <param name="category" value="component" />
+        <param name="android-package" value="com.alibaba.weex.amap.component.WXMapPolygonComponent" />
+        <param name="api" value="weex-amap-polygon" />
+    </feature>
+    <feature name="WXMapModule">
+        <param name="category" value="module" />
+        <param name="android-package" value="com.alibaba.weex.amap.module.WXMapModule" />
+        <param name="api" value="amap" />
+    </feature>
+</widget>
