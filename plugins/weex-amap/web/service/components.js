@@ -19,6 +19,7 @@ const components = {
         // this is a sdk bug polyfill
         opts.offset = new AMap.Pixel(0, 0);
       }
+      console.log(id);
       this._components[id] = new AMap[className](opts);
       if (typeof callback === 'function') {
         callback(this._components[id], mapIns);
@@ -32,6 +33,7 @@ const components = {
     if (!id) {
       return vendor.getObjectFirstVal(this._components);
     }
+    
     return this._components[id];
   },
   getComponentMap() {

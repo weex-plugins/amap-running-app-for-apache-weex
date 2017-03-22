@@ -2,11 +2,13 @@ import components from '../service/components';
 import vendor from '../service/vendor';
 
 const componentName = 'polyline';
+
+let data = {};
 // prototype methods.
 const proto = {
   create() {
     const node = document.createElement('div');
-    const data = this.data.attr;
+    data = this.data.attr;
     const comId = data.ref || vendor.gengerateRandomId(componentName);
     if (data.path && Array.isArray(data.path)) {
       components.registerComponent(componentName, {
@@ -15,12 +17,15 @@ const proto = {
         strokeOpacity: data.strokeOpacity,
         strokeColor: data.strokeColor,
         strokeStyle: data.strokeStyle,
+        lineJoin: 'round',
         events: {
           click: () => {
             this.dispatchEvent('click');
           }
         },
-      }, comId);
+      }, comId, (com) => {
+        com.setPath(data.path);
+      });
     } else {
       console.warn('attribute path must be an array.');
     }
@@ -30,7 +35,15 @@ const proto = {
 };
 
 const attr = {
-
+  path(val) {
+    if (Array.isArray(val) && val.length >= 2) {
+      data.path = val;
+      const com = components.getComponent(this._comId);
+      if (com) {
+        com.setPath(val);
+      }
+    }
+  }
 };
 
 const event = {
@@ -45,8 +58,8 @@ function init(Weex) {
   const Component = Weex.Component;
   const extend = Weex.utils.extend;
 
-  function AmapPolygon(data) {
-    Component.call(this, data);
+  function AmapPolygon(opts) {
+    Component.call(this, opts);
   }
   AmapPolygon.prototype = Object.create(Component.prototype);
   extend(AmapPolygon.prototype, proto);

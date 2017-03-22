@@ -16,14 +16,13 @@ module.exports = {
     const s = this.setZero(time % 60);
     return h + ':' + i + ':' + s;
   },
-  
   kmtom(miles) {
-     return (Math.floor(miles / 1000)).toFixed(2);
+    return (miles / 1000).toFixed(2);
   },
-  getDate(time) {
-    var d = new Date();
-    var datestring = d.getFullYear() + '-' + ('0' + d.getMonth()).slice('-2') + ("0" + d.getDate()).slice(-2) + "-"
-     + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+  getDate() {
+    const d = new Date();
+    const datestring = d.getFullYear() + '-' + ('0' + (1 + d.getMonth())).slice('-2') + '-' + ('0' + d.getDate()).slice(-2)
+     + ' ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
     return datestring;
   },
   setZero(number) {
@@ -31,6 +30,16 @@ module.exports = {
   },
   calcSpeed(distance, time) {
     return ((distance / time) * 3.6).toFixed(2);
+  },
+  setPosition(path) {
+    const l = path.length;
+    let longitudes = 0;
+    let latitudes = 0;
+    path.forEach((item) => {
+      longitudes += item[1];
+      latitudes += item[0];
+    });
+    return [(latitudes / l).toFixed(6), (longitudes / l).toFixed(6)];
   },
   extend(obj1, obj2) {
     for (const p in obj2) {
@@ -86,5 +95,10 @@ module.exports = {
 
     const newUrl = base + jsFile;
     return newUrl;
+  },
+  getUrlParam(url, key) {
+    const reg = new RegExp('[?|&]' + key + '=([^&]+)');
+    const match = url.match(reg);
+    return match && match[1];
   }
 };

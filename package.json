@@ -28,7 +28,6 @@
     "weex-loader": "^0.3.3"
   },
   "dependencies": {
-    "moment": "^2.18.0",
     "weex-components": "*",
     "weex-html5": "^0.3.2",
     "weex-percentage-circle": "^1.0.1"

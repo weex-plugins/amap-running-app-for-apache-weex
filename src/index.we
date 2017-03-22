@@ -28,7 +28,7 @@
     <div class="history-center">
       <text>历史记录</text>
       <div class="list">
-        <div class="item" repeat="item in historyData">
+        <div class="item" repeat="item in historyData" index="{{$index}}" onclick="viewData($index)">
           <div class="item-distance">
             <unit number="{{item.miles}}" label="千米"></unit>
           </div>
@@ -165,6 +165,13 @@
         const url = this.$getConfig().bundleUrl;
         navigator.push({
           url: utils.setBundleUrl(url, 'running.js') ,
+        });
+      },
+      
+      viewData(index) {
+        const url = this.$getConfig().bundleUrl;
+        navigator.push({
+          url: utils.setBundleUrl(url, 'running.js?index=' + index) ,
         })
       },
       
@@ -172,7 +179,6 @@
     
     created() {
       const self = this;
-      console.log(self);
       storage.getItem('runningData', function (res) {
         if (res.result == 'success') {
           try {

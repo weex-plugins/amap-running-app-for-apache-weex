@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <weex-amap id="map2017" geolocation="true" center="{{pos}}" class="map" sdk-key="{{keys}}" zoom="{{zoom}}">
-      <weex-amap-polyline path="{{runningData.path}}" stroke-width="3" stroke="#3498db"></weex-amap-polyline>
+      <weex-amap-polyline path="{{polylinePath}}" stroke-opacity="0.9"  stroke-style="solid" stroke-width="8" stroke-color="#1ba1e2"></weex-amap-polyline>
     </weex-amap>
-    <div class="map-controller">
+    <div class="map-controller" if="{{status!=4}}">
       <div class="distance-wrap">
         <text class="distance">{{runningData.miles}}</text>
         <text class="unit">公里</text>
@@ -26,16 +26,19 @@
       </div>
       <div class="btn-wrap">
         <div class="btn-circle btn-green" if="{{status==1}}" onclick="start">
-          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued1c495f140208fd912adaded2bac09764.png"></image>
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1sGrEQXXXXXc4XVXXXXXXXXXX-60-60.png"></image>
         </div>
         <div class="btn-circle btn-midnight" if="{{status==2 || status == 3}}" onclick="end">
           <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued4174aaf94bc8e9c8d5bceb5efcba1be3.png"></image>
         </div>
         <div class="btn-circle btn-green" if="{{status == 3}}" onclick="continue">
-          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued1c495f140208fd912adaded2bac09764.png"></image>
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1sGrEQXXXXXc4XVXXXXXXXXXX-60-60.png"></image>
         </div>
         <div class="btn-circle btn-red" if="{{status==2}}" onclick="stop">
-          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vueda7f1efb2c417abd362293071651cfc23.png"></image>
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1A6vJQXXXXXa0XVXXXXXXXXXX-60-60.png"></image>
+        </div>
+        <div class="btn-circle btn-red" if="{{status==5}}" onclick="backHome">
+          <text class="btn-text">返回</text>
         </div>
       </div>
     </div>
@@ -55,7 +58,7 @@
     background-color: #eee;
   }
   .countdown-view{
-    z-index: 2100;
+    z-index: 10001;
     position: absolute;
     left: 0;
     right: 0;
@@ -74,7 +77,7 @@
     min-height: 600;
   }
   .map-controller{
-    z-index: 2000;
+    z-index: 10000;
     position: absolute;
     left: 0;
     right: 0;
@@ -136,6 +139,10 @@
     justify-content: center;
     background-color: #eee;
   }
+  .btn-text{
+    font-size: 30;
+    color: #fff;
+  }
   .btn-icon{
     width: 60;
     height: 60;
@@ -149,8 +156,6 @@
   .btn-midnight{
     background-color: #34495e;
   }
-  
-  
 </style>
 
 <script>
@@ -161,7 +166,7 @@
   require('./include/success.we');
   const storage = require('@weex-module/storage')
   const Amap = require('@weex-module/amap');
-  const modal = require('@weex-module/modal');
+  const navigator = require('@weex-module/navigator');
   module.exports = {
     data: {
       keys: {
@@ -169,8 +174,8 @@
         ios: 'c551f83e1e5b19af89c74096f1c0f007',
         android: 'db6a973159cb0c2639ad02c617a786ae'
       },
-      zoom: 18,
-      pos: [116.397428, 39.90923],
+      zoom: 16,
+      pos: [116.48635, 40.00079],
       status: status['RUNNING_READY'],
       runningData: {
         distance: 0,
@@ -181,6 +186,7 @@
         speed: 0,
         calories: 0,
       },
+      polylinePath:[],
       message: '正在运行',
       countdown: {
         text: '3',
@@ -189,6 +195,9 @@
       // two time tricker
       timeRecorder: null,
       amapRecorder: null,
+      // test data
+      test: true,
+      color: '#1ba1e2',
       
     },
     
@@ -199,7 +208,9 @@
         this.countDownTime();
         this.runningAmapGeolocation();
       },
-      
+      backHome() {
+        navigator.pop();
+      },
       stop() {
         this.status = status.RUNNING_PAUSE;
         clearInterval(this.timeRecorder);
@@ -244,6 +255,8 @@
         }
         this.timeRecorder = setInterval(() => {
           this.runningData.seconds ++;
+          const a = ['#000000', '#2980b9', '#34495e'];
+          this.color = a[this.runningData.seconds % 3];
           if(this.runningData.seconds <= 4) {
             if (this.runningData.seconds == 3) {
               this.countdown.text = 'GO!';    
@@ -266,10 +279,17 @@
         this.amapRecorder= setInterval(() => {
           this.setUserLocation((res) => {
             if(res.result == 'success') {
-              this.pos = res.data.position;
-              this.runningData.path.push(res.data.position);
+              if (this.test) {
+                const len = this.runningData.path.length;
+                this.runningData.path.push([this.runningData.path[len-1][0] + 0.0011,this.runningData.path[len-1][1] + 0.0011]);
+              } else {
+                this.runningData.path.push(res.data.position);  
+              }
+              this.polylinePath = Array.from(this.runningData.path);
+              this.pos = utils.setPosition(this.runningData.path);
               this.calcDistanceAndSpeed();
             }
+            
           });
         }, 10000);
       },
@@ -278,9 +298,10 @@
         if(len > 1) {
           Amap.getLineDistance(this.runningData.path[len-1], this.runningData.path[len-2], (res) => {
             if(res.result == 'success') {
-              this.runningData.distance = 1 * this.runningData.distance + res.data.distance;
-              this.runningData.miles = utils.kmtom(this.runningData.distance);
+              console.log(res.data.distance);
+              this.runningData.distance += res.data.distance;
             }
+            this.runningData.miles = utils.kmtom(this.runningData.distance);
             this.runningData.calories = (this.runningData.distance / 1000).toFixed(2);
             this.runningData.speed = utils.calcSpeed(this.runningData.distance, this.runningData.seconds);
           });
@@ -288,5 +309,27 @@
       }
       
     },
+    
+    created() {
+      const url = this.$getConfig().bundleUrl;
+      const index = utils.getUrlParam(url,'index');
+      storage.getItem('runningData', (res) => {
+        let data = [];
+        if (res.result == 'success') {
+           data = res.data;
+        }
+        if (typeof data === 'string') {
+          data = JSON.parse(data);
+        }
+        if (data[index]) {
+          this.status = 5;
+          this.runningData= data[index];
+          this.polylinePath = this.runningData.path;
+          this.pos = utils.setPosition(this.runningData.path);
+          console.log(this.runningData);
+        }
+      });
+      
+    }
   }
 </script>

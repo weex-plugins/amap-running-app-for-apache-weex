@@ -14,6 +14,7 @@
         "comma-dangle": 0,
         "object-shorthand": 0,
         "no-underscore-dangle": 0,
+        "no-param-reassign": 0,
         "no-plusplus": 0,
         "consistent-return": 0,
         "prefer-template": 0

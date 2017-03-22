@@ -51,4 +51,5 @@ function walk(dir, root) {
       plugins: ['transform-runtime']
     },
     plugins: [new webpack.optimize.UglifyJsPlugin({minimize: true})]
-  }
+  };
+  
