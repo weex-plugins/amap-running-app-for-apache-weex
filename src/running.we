@@ -29,7 +29,7 @@
           <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1sGrEQXXXXXc4XVXXXXXXXXXX-60-60.png"></image>
         </div>
         <div class="btn-circle btn-midnight" if="{{status==2 || status == 3}}" onclick="end">
-          <image class="btn-icon" src="http://img1.vued.vanthink.cn/vued4174aaf94bc8e9c8d5bceb5efcba1be3.png"></image>
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1uEnqQXXXXXcdapXXXXXXXXXX-60-60.png"></image>
         </div>
         <div class="btn-circle btn-green" if="{{status == 3}}" onclick="continue">
           <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1sGrEQXXXXXc4XVXXXXXXXXXX-60-60.png"></image>
@@ -196,7 +196,7 @@
       timeRecorder: null,
       amapRecorder: null,
       // test data
-      test: true,
+      test: false,
       color: '#1ba1e2',
       
     },
