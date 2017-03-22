@@ -51,6 +51,9 @@ weexpack run android
 <img width="320" src="https://gw.alicdn.com/tfs/TB1gi2jQXXXXXb5aFXXXXXXXXXX-480-776.gif" />
 
 
+*截图数据仅供演示*
+
+
 
 
 
