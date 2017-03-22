@@ -21,19 +21,19 @@ git clone https://github.com/weex-plugins/amap-running-app
 weex plaform add android
 ```
 
-4.添加插件 `weex-amap`
+4.添加插件 [weex-amap](https://github.com/weex-plugins/weex-amap)
 
 ``` bash
 weex plugin add weex-amap
 ```
 
-这个时候你就可以运行命令看到具体运行的效果了
+这个时候你就可以运行命令看具体运行的效果了：
 
 ``` bash
 weex run android
 ```
 
-如果你自己使用weex-toolkit创建项目，你只需要这样做:
+如果你自己使用weex-toolkit创建项目，你只需要这样做：
 
 ``` bash
 weex create runningapp
