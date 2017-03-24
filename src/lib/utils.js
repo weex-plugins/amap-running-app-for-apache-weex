@@ -3,7 +3,7 @@ module.exports = {
     let sum = 0;
     arr.forEach((item) => {
       if (k) {
-        sum += item[k];
+        sum += 1 * item[k];
       } else {
         sum += item;
       }

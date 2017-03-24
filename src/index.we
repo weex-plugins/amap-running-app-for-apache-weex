@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <scroller class="container">
     <navbar hide-return="true" title="weex-sports"></navbar>
     <text class="title">我的运动</text>
     <div class="data-container">
@@ -13,15 +13,24 @@
       <div class="data-dashboard">
         <div class="data-dashboard-item">
           <text class="data-dashboard-label">距离</text>
-          <unit number="{{total.distance}}" label="公里"></unit>
+          <div class="unit-box">
+            <text class="unit-number">{{total.distance}}</text>
+            <text class="unit-text">公里</text>
+          </div>
         </div>
         <div class="data-dashboard-item">
           <text class="data-dashboard-label">热量</text>
-          <unit number="{{total.calories}}" label="卡路里"></unit>
+          <div class="unit-box">
+            <text class="unit-number">{{total.calories}}</text>
+            <text class="unit-text">千卡</text>
+          </div>
         </div>
         <div class="data-dashboard-item">
           <text class="data-dashboard-label">时间</text>
-          <unit number="{{total.time}}" label="分钟"></unit>
+          <div class="unit-box">
+            <text class="unit-number">{{total.time}}</text>
+            <text class="unit-text">分钟</text>
+          </div>
         </div>
       </div>
     </div>
@@ -41,7 +50,7 @@
     </div>
     
     <text class="footer">Powered By Weex</text>
-  </div>
+  </scroller>
 </template>
 
 <style>
@@ -134,13 +143,29 @@
     padding: 20;
     align-items: center;
   }
-  
+  .unit-box{
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .unit-number {
+    display: inline-block;
+    font-size: 50;
+    color: #111;
+  }
+  .unit-text{
+    font-size: 22;
+    color: #333;
+    padding-left: 20;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
 </style>
 
 <script>
   require('weex-percentage-circle')
   require('./include/navbar.we');
-  require('./include/unit.we');
+ // require('./include/unit.we');
   require('./include/list.we');
   const utils = require('./lib/utils');
   const navigator = require('@weex-module/navigator');
@@ -185,6 +210,7 @@
             let data = JSON.parse(res.data);
             self.historyData = data;
             self.total.distance = utils.calcTotal(data, 'miles');
+            console.log(self.total.distance);
             self.total.calories = utils.calcTotal(data, 'calories');
             self.total.time = utils.setTimeFormat(utils.calcTotal(data, 'seconds'));
             
