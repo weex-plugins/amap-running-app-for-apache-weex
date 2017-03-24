@@ -4,7 +4,7 @@
 
 > 一套构建高性能、可扩展的原生应用的跨平台开发方案
 
-Weex 给大家带来的无疑是客户端开发效率的提升，我们可以通过一套代码，实现web，android, iOS的三个平台上运行。自己最近尝试了一次借助weex的插件机制，使用[Weex高德地图插件](https://github.com/weex-plugins/weex-amap) 可以开发 LBS 相关的应用。
+Weex 给大家带来的无疑是客户端开发效率的提升，我们可以通过一套代码，实现web，android, iOS的三个平台上运行。自己最近尝试了一次借助weex的插件机制，使用[Weex-Amap地图插件](https://github.com/weex-plugins/weex-amap) 可以开发 LBS 相关的应用。
 
 ### 使用 weex-toolkit 创建项目
 
@@ -74,7 +74,7 @@ weex plugin add weex-amap
 
 大家也都用过跑步的APP,常见的界面布局如下:
 
-<img src="http://img1.vued.vanthink.cn/vuede21bf6eea99256eb24b8517c94e97093.png" />
+<img width="320" src="http://img1.vued.vanthink.cn/vuede21bf6eea99256eb24b8517c94e97093.png" />
 
 那么我们页面的基本结构就已经出来了:
 
