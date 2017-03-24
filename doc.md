@@ -1,10 +1,10 @@
-## 使用 weex 快速开发一款三端运行的跑步应用
+## 通过Weex 300行代码开发一款简易的跑步App
 
-[weex](https://weex.apache.org/cn/)正如它的目标，
+[Weex](https://weex.apache.org/cn/)正如它的目标，
 
 > 一套构建高性能、可扩展的原生应用的跨平台开发方案
 
-weex给大家带来的无疑是客户端开发效率的提升，我们可以通过一套代码，实现web，android, iOS的三个平台上运行。自己最近尝试了一次借助weex的插件机制，使用[Weex高德地图插件](https://github.com/weex-plugins/weex-amap) 我们可以开发 LBS 相关的应用。
+Weex 给大家带来的无疑是客户端开发效率的提升，我们可以通过一套代码，实现web，android, iOS的三个平台上运行。自己最近尝试了一次借助weex的插件机制，使用[Weex高德地图插件](https://github.com/weex-plugins/weex-amap) 可以开发 LBS 相关的应用。
 
 ### 使用 weex-toolkit 创建项目
 
@@ -271,7 +271,9 @@ module.exports = {
 #### 实现流程
 
 我们接下来，按照流程来实现我们的程序逻辑：
-
+``` js
+const status = require('./lib/status');
+...
 module.exports = {
   // ...
   methods() {
@@ -289,8 +291,50 @@ module.exports = {
     },
   }
 }
+```
+
+##### start
+
+开始的业务逻辑很简单，就是更改页面状态到运行中，然后执行程序。
+
+``` js
+start() {
+  this.status = status.RUNNING_DOING;
+  this.runningAmapGeolocation();
+}
 
 ```
+
+##### stop
+
+暂停的话，我们需要清除掉页面的计时器。
+
+``` js
+stop() {
+  this.status = status.RUNNING_PAUSE;
+  clearInterval(this.timeRecorder); // 计算时间
+  clearInterval(this.amapRecorder); // 计算定位
+}
+```
+##### end
+
+点击结束按钮，我们需要清除计时器，然后显示出累计的数据就行了，当然做的复杂一点，还可以进行数据的存储等。
+
+``` js
+end() {
+  clearInterval(this.timeRecorder);
+  clearInterval(this.amapRecorder);
+  /* 使用存储
+  * storage.getItem('runningData', (res) => {
+  * ...  
+  * }) 
+  */
+}
+```
+
+
+
+
 
 #### 实现地图定位
 
