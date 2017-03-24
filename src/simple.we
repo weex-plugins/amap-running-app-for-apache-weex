@@ -1,0 +1,326 @@
+<template>
+  <div class="container">
+    <weex-amap id="map2017" geolocation="true" center="{{pos}}" class="map" sdk-key="{{keys}}" zoom="{{zoom}}">
+      <weex-amap-polyline path="{{polylinePath}}" stroke-opacity="0.9"  stroke-style="solid" stroke-width="8" stroke-color="#1ba1e2"></weex-amap-polyline>
+    </weex-amap>
+    <div class="map-controller" if="{{status!=4}}">
+      <div class="distance-wrap">
+        <text class="distance">{{runningData.miles}}</text>
+        <text class="unit">公里</text>
+      </div>
+      <div class="dashboard">
+        <div class="dashboard-item">
+          <div class="time-wrap">
+            <text class="dashboard-title">运动时间</text>
+            <text class="number-lg">{{runningData.time}}</text>
+          </div>
+        </div>
+        <div class="dashboard-item">
+          <text class="dashboard-title">配速</text>
+          <text class="number-lg">{{runningData.speed}}</text>
+        </div>
+        <div class="dashboard-item">
+          <text class="dashboard-title">热量</text>
+          <text class="number-lg">{{runningData.calories}}</text>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <div class="btn-circle btn-green" if="{{status==1}}" onclick="start">
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1sGrEQXXXXXc4XVXXXXXXXXXX-60-60.png"></image>
+        </div>
+        <div class="btn-circle btn-midnight" if="{{status==2 || status == 3}}" onclick="end">
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1uEnqQXXXXXcdapXXXXXXXXXX-60-60.png"></image>
+        </div>
+        <div class="btn-circle btn-green" if="{{status == 3}}" onclick="continue">
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1sGrEQXXXXXc4XVXXXXXXXXXX-60-60.png"></image>
+        </div>
+        <div class="btn-circle btn-red" if="{{status==2}}" onclick="stop">
+          <image class="btn-icon" src="https://gw.alicdn.com/tfs/TB1A6vJQXXXXXa0XVXXXXXXXXXX-60-60.png"></image>
+        </div>
+        <div class="btn-circle btn-red" if="{{status==5}}" onclick="backHome">
+          <text class="btn-text">返回</text>
+        </div>
+      </div>
+    </div>
+    <success if="{{status==4}}" data="{{runningData}}"></success>
+  </div>
+</template>
+
+<style>
+  .container{
+    position: relative;
+    flex: 1;
+    min-height: 600;
+    background-color: #eee;
+  }
+  .countdown-view{
+    z-index: 10001;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+  }
+  .countdown-text{
+    color: #ff656d;
+    font-size: 120;
+  }
+  .map{
+    flex: 1;
+    min-height: 600;
+  }
+  .map-controller{
+    z-index: 10000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 500;
+    background-color: rgba(255,255,255,1);
+    border-top-width: 2;
+    border-top-color: rgba(0,0,0,.25);
+  }
+  .distance-wrap{
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .distance {
+    display: inline-block;
+    font-size: 90;
+    color: #111;
+  }
+  .unit{
+    font-size: 22;
+    color: #333;
+    padding-top: 30;
+    padding-left: 20;
+  }
+  .dashboard{
+    flex: 1;
+    flex-direction: row;
+  }
+  .dashboard-title{
+    color: #999;
+    font-size: 25;
+    margin-bottom: 20;
+  }
+  .dashboard-item{
+    flex:1;
+    padding-left: 40;
+    justify-content: center;
+  }
+  .number-lg{
+    font-size: 42;
+    color: #222222;
+  }
+  
+  .btn-wrap{
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-circle {
+    width: 140;
+    height: 140;
+    margin-left: 40;
+    margin-right: 40;
+    border-radius: 120;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+  }
+  .btn-text{
+    font-size: 30;
+    color: #fff;
+  }
+  .btn-icon{
+    width: 60;
+    height: 60;
+  }
+  .btn-red{
+    background-color: #ff626d;
+  }
+  .btn-green{
+    background-color: #21d45f;
+  }
+  .btn-midnight{
+    background-color: #34495e;
+  }
+</style>
+
+<script>
+  const utils = require('./lib/utils');
+  const status = require('./lib/status');
+  require('./include/message.we');
+  require('./include/unit.we');
+  require('./include/success.we');
+  const storage = require('@weex-module/storage')
+  const Amap = require('@weex-module/amap');
+  const navigator = require('@weex-module/navigator');
+  module.exports = {
+    data: {
+      keys: {
+        h5:'f4b99dcd51752142ec0f1bdcb9a8ec02',
+        ios: 'c551f83e1e5b19af89c74096f1c0f007',
+        android: 'db6a973159cb0c2639ad02c617a786ae'
+      },
+      zoom: 16,
+      pos: [116.48635, 40.00079],
+      status: status['RUNNING_READY'],
+      runningData: {
+        distance: 0,
+        miles: 0,
+        path: [],
+        time: '00:00:00',
+        seconds: 0,
+        speed: 0,
+        calories: 0,
+      },
+      polylinePath:[],
+      // two time tricker
+      timeRecorder: null,
+      amapRecorder: null,
+      // test data
+      test: false,
+      color: '#1ba1e2',
+      
+    },
+    
+    methods: {
+      start() {
+        this.status = status.RUNNING_DOING;
+        this.countdown.show = true;
+        this.countDownTime();
+        this.runningAmapGeolocation();
+      },
+      backHome() {
+        navigator.pop();
+      },
+      stop() {
+        this.status = status.RUNNING_PAUSE;
+        clearInterval(this.timeRecorder);
+        clearInterval(this.amapRecorder);
+      },
+      continue() {
+        this.countDownTime();
+        this.runningAmapGeolocation();
+        this.status = status.RUNNING_DOING;
+      },
+      end() {
+        clearInterval(this.timeRecorder);
+        clearInterval(this.amapRecorder);
+        const self = this;
+        storage.getItem('runningData', (res) => {
+          let data = [];
+          if (res.result == 'success') {
+             data = res.data;
+          }
+          if (typeof data === 'string') {
+            data = JSON.parse(data);
+          }
+          data.unshift(utils.extend({
+            date: utils.getDate().replace(/\s.+/,''),
+            standrandDate: utils.getDate()
+          }, self.runningData));
+          storage.setItem('runningData', JSON.stringify(data), (res) => {
+            if(res.result == 'success') {
+              self.status = status.RUNNING_END;    
+            };
+          })
+        })
+      },
+      
+      setUserLocation(callback) {
+        Amap.getUserLocation(this.$el('map2017').ref, callback);
+      },
+      
+      countDownTime() {
+        if (this.status == status.RUNNING_DOING) {
+          this.countdown.show = true;  
+        }
+        this.timeRecorder = setInterval(() => {
+          this.runningData.seconds ++;
+          const a = ['#000000', '#2980b9', '#34495e'];
+          this.color = a[this.runningData.seconds % 3];
+          if(this.runningData.seconds <= 4) {
+            if (this.runningData.seconds == 3) {
+              this.countdown.text = 'GO!';    
+            } else if(this.runningData.seconds == 4) {
+              this.countdown.show = false;
+            } else {
+              this.countdown.text = 3 - this.runningData.seconds;
+            }
+          }
+          this.runningData.time = utils.setTimeFormat(this.runningData.seconds);
+        }, 1000);  
+      },
+      runningAmapGeolocation() {
+        this.setUserLocation((res) => {
+          if(res.result == 'success') {
+            this.pos = res.data.position;
+            this.runningData.path.push(res.data.position);
+          }  
+        }); 
+        this.amapRecorder= setInterval(() => {
+          this.setUserLocation((res) => {
+            if(res.result == 'success') {
+              if (this.test) {
+                const len = this.runningData.path.length;
+                this.runningData.path.push([this.runningData.path[len-1][0] + 0.0011,this.runningData.path[len-1][1] + 0.0011]);
+              } else {
+                this.runningData.path.push(res.data.position);  
+              }
+              this.polylinePath = Array.from(this.runningData.path);
+              this.pos = utils.setPosition(this.runningData.path);
+              this.calcDistanceAndSpeed();
+            }
+            
+          });
+        }, 10000);
+      },
+      calcDistanceAndSpeed() {
+        const len = this.runningData.path.length
+        if(len > 1) {
+          Amap.getLineDistance(this.runningData.path[len-1], this.runningData.path[len-2], (res) => {
+            if(res.result == 'success') {
+              console.log(res.data.distance);
+              this.runningData.distance += res.data.distance;
+            }
+            this.runningData.miles = utils.kmtom(this.runningData.distance);
+            this.runningData.calories = (this.runningData.distance / 1000).toFixed(2);
+            this.runningData.speed = utils.calcSpeed(this.runningData.distance, this.runningData.seconds);
+          });
+        }
+      }
+      
+    },
+    
+    created() {
+      const url = this.$getConfig().bundleUrl;
+      const index = utils.getUrlParam(url,'index');
+      storage.getItem('runningData', (res) => {
+        let data = [];
+        if (res.result == 'success') {
+           data = res.data;
+        }
+        if (typeof data === 'string') {
+          data = JSON.parse(data);
+        }
+        if (data[index]) {
+          this.status = 5;
+          this.runningData= data[index];
+          this.polylinePath = this.runningData.path;
+          this.pos = utils.setPosition(this.runningData.path);
+          console.log(this.runningData);
+        }
+      });
+      
+    }
+  }
+</script>

@@ -171,7 +171,7 @@ weex plugin add weex-amap
 
 ```
 
-#### 定义数据模型
+### 定义数据模型
 
 我们需要在界面里显示四组数据:
 
@@ -268,7 +268,7 @@ module.exports = {
 <template>
 
 ```
-#### 实现流程
+### 实现流程
 
 我们接下来，按照流程来实现我们的程序逻辑：
 ``` js
@@ -293,7 +293,7 @@ module.exports = {
 }
 ```
 
-##### start
+#### start
 
 开始的业务逻辑很简单，就是更改页面状态到运行中，然后执行程序。
 
@@ -305,7 +305,7 @@ start() {
 
 ```
 
-##### stop
+#### stop
 
 暂停的话，我们需要清除掉页面的计时器。
 
@@ -316,7 +316,7 @@ stop() {
   clearInterval(this.amapRecorder); // 计算定位
 }
 ```
-##### end
+#### end
 
 点击结束按钮，我们需要清除计时器，然后显示出累计的数据就行了，当然做的复杂一点，还可以进行数据的存储等。
 
@@ -361,7 +361,7 @@ etUserLocation(callback) {
 }
 ```
 
-#### 实现地图距离计算
+### 实现地图距离计算
 
 ```
 // 我们引入第三发utils文件，用于一些计算
@@ -391,7 +391,7 @@ calcDistanceAndSpeed() {
 其中 utils.js 的实现可以参考 [这里](https://github.com/weex-plugins/amap-running-app/blob/master/src/lib/utils.js)。
 
 
-#### 让程序自动跑起来
+### 让程序自动跑起来
 
 大家写JS一定都实现过一个倒计时的程序，常用的解决方案就是 `setInterval` (关于setInterval 时间的执行的问题可以看[这里](http://javascript.info/tutorial/settimeout-setinterval)) 。
 
