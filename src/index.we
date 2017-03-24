@@ -4,8 +4,6 @@
     <text class="title">我的运动</text>
     <div class="data-container">
       <div class="data-circle">
-        <weex-percentage-circle border-width="8" color="#e74c3c" percent="70" radius="150">
-        </weex-percentage-circle>
         <div class="btn-go" onclick="go">
           <text class="btn-go-text">开始跑步</text>
         </div>
@@ -57,7 +55,6 @@
   .container{
     position: relative;
     flex: 1;
-    min-height: 800;
     background-color: #eee;
   }
   .title {
@@ -163,7 +160,7 @@
 </style>
 
 <script>
-  require('weex-percentage-circle')
+ // require('weex-percentage-circle')
   require('./include/navbar.we');
  // require('./include/unit.we');
   require('./include/list.we');
