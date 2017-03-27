@@ -6,6 +6,23 @@
 
 Weex 给大家带来的无疑是客户端开发效率的提升，我们可以通过一套代码，实现web，android, iOS的三个平台上运行。自己最近尝试了一次借助weex的插件机制，使用[Weex-Amap地图插件](https://github.com/weex-plugins/weex-amap) 可以开发 LBS 相关的应用。
 
+首先我们先来看下运行的效果吧:
+
+<img src="https://gw.alicdn.com/tfs/TB1XfMFQXXXXXboaFXXXXXXXXXX-480-798.gif"/>
+
+*截图数据仅供参考*
+
+它大概具备下面的一些功能;
+
++ 统计用户在运动过程中的距离累计，时间计算等。
++ 存储用户的运动数据
++ 使用地图定位和距离计算的API，实现距离统计。
++ 显示地图折线，通过对定位的数据地理位置进行折线绘制
++ 统计用户运动的数据，计算总距离和时间
++ 点击用户的历史记录，可以查看轨迹
+
+感觉和大家所用到的app功能相差不多了，但实际上我们借助 Weex 和 Weex-Amap 插件可以非常快速的实现这些功能，下面我们来看下具体怎么实现吧。 
+
 ### 使用 weex-toolkit 创建项目
 
 首先我们按照官网的教程安装[weex-toolkit](https://weex.apache.org/cn/guide/set-up-env.html)。如果已经安装过请忽略。
@@ -443,9 +460,7 @@ weex run android
 运行的界面截图：
 
 
-<img src="https://gw.alicdn.com/tfs/TB1gi2jQXXXXXb5aFXXXXXXXXXX-480-776.gif"/>
 
-* 截图数据仅供参考 *
 
 
 *PS: 当然如果你要做出一个 科学 的跑步程序，还需要你加入大量测试和数据的纠正，比如我们在使用过程会遇到定位的偏差，断网， 用户没有开启定位权限等问题，这些都是我们需要考虑和应对的*

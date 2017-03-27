@@ -4,18 +4,17 @@
     <text class="title">我的运动</text>
     <div class="data-container">
       <div class="data-circle">
+        
+        <div class="total-distance">
+          <text class="total-label">运行总距离</text>
+          <text class="total-number">{{total.distance}}</text>
+          <text>公里</text>
+        </div>
         <div class="btn-go" onclick="go">
           <text class="btn-go-text">开始跑步</text>
         </div>
       </div>
       <div class="data-dashboard">
-        <div class="data-dashboard-item">
-          <text class="data-dashboard-label">距离</text>
-          <div class="unit-box">
-            <text class="unit-number">{{total.distance}}</text>
-            <text class="unit-text">公里</text>
-          </div>
-        </div>
         <div class="data-dashboard-item">
           <text class="data-dashboard-label">热量</text>
           <div class="unit-box">
@@ -80,7 +79,7 @@
     width: 400;
     padding: 20;
     margin-top: 60;
-    background-image: linear-gradient(to left, #FF4E50 , #F9D423); 
+    background-color: #FF4E50;
     border-width: 4;
     border-color: #ffffff;
     border-radius: 40;
@@ -156,6 +155,18 @@
     padding-left: 20;
     justify-content: flex-end;
     align-items: flex-end;
+  }
+  .total-distance{
+    width: 400;
+    align-items: center;
+    justify-content: center;
+  }
+  .total-label{
+    font-size: 30;
+    color: #999;
+  }
+  .total-number{
+    font-size: 120px;
   }
 </style>
 

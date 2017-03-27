@@ -196,7 +196,7 @@
       timeRecorder: null,
       amapRecorder: null,
       // test data
-      test: false,
+      test: true,
       color: '#1ba1e2',
       
     },
