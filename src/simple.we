@@ -195,7 +195,6 @@
     methods: {
       start() {
         this.status = status.RUNNING_DOING;
-        this.countdown.show = true;
         this.countDownTime();
         this.runningAmapGeolocation();
       },
@@ -241,13 +240,9 @@
       },
       
       countDownTime() {
-        if (this.status == status.RUNNING_DOING) {
-          this.countdown.show = true;  
-        }
+        
         this.timeRecorder = setInterval(() => {
           this.runningData.seconds ++;
-          const a = ['#000000', '#2980b9', '#34495e'];
-          this.color = a[this.runningData.seconds % 3];
           if(this.runningData.seconds <= 4) {
             if (this.runningData.seconds == 3) {
               this.countdown.text = 'GO!';    
@@ -300,27 +295,5 @@
       }
       
     },
-    
-    created() {
-      const url = this.$getConfig().bundleUrl;
-      const index = utils.getUrlParam(url,'index');
-      storage.getItem('runningData', (res) => {
-        let data = [];
-        if (res.result == 'success') {
-           data = res.data;
-        }
-        if (typeof data === 'string') {
-          data = JSON.parse(data);
-        }
-        if (data[index]) {
-          this.status = 5;
-          this.runningData= data[index];
-          this.polylinePath = this.runningData.path;
-          this.pos = utils.setPosition(this.runningData.path);
-          console.log(this.runningData);
-        }
-      });
-      
-    }
   }
 </script>
