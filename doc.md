@@ -460,10 +460,43 @@ weex run android
 *PS: 当然如果你要做出一个 科学 的跑步程序，还需要你加入大量测试和数据的纠正，比如我们在使用过程会遇到定位的偏差，断网， 用户没有开启定位权限等问题，这些都是我们需要考虑和应对的*
 
 
-如果大家在实现过程中遇到问题可以参考 Github 上这个项目的一些代码。相对刚刚这个简单的功能，它晚上了存储和数据预览，以及倒计时等小细节。
+
+
+### 运行 Github 上项目
+
+
+如果大家在实现过程中遇到问题可以参考 Github 上这个项目的一些代码。相对刚刚这个简单的功能，它完善了存储和数据预览，以及倒计时等小细节。
+
+1.首先克隆这个项目(后面会写如何自己创建这样的项目). 确保你自己环境安装了[weex-toolkit](https://github.com/weexteam/weex-toolkit)
+
+``` bash
+git clone https://github.com/weex-plugins/amap-running-app
+```
+
+2.进入克隆的项目目录，然后执行 `npm install`
+
+
+3.测试你的需要运行的平台，比如android 或者 ios
+
+``` bash
+weex plaform add android
+```
+
+4.添加插件 [weex-amap](https://github.com/weex-plugins/weex-amap)
+
+``` bash
+weex plugin add weex-amap
+```
+
+这个时候你就可以运行命令看具体运行的效果了：
+
+``` bash
+weex run android
+```
+
 
 [amap-running-app](https://github.com/weex-plugins/amap-running-app),也欢迎PR，拍砖。
-
+  
 
 
 ### 扩展阅读
