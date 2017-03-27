@@ -84,7 +84,7 @@ weex plugin add weex-amap
 ```
 其中 `your_path` 指定类似这样的数据： [[116.487, 40.00003],[113.487, 40.0002]...]
 
-关于更多的如何使用[weex-amap]() 插件，可以参考这篇 [文章]() 以及 官方[Demos](https://github.com/weex-plugins/weex-amap/tree/master/demos)
+关于更多的如何使用[weex-amap](https://github.com/weex-plugins/weex-amap) 插件，可以参考这篇 [文章]() 以及 官方[Demos](https://github.com/weex-plugins/weex-amap/tree/master/demos)
 
 
 ### 设计页面功能和逻辑
@@ -447,7 +447,7 @@ countDownTime() {
 
 透过代码我们可以看到程序会大约每隔十秒进行一次定位，然后再进行计算和距离累加。
 
-[文件源代码]()
+[文件源代码](https://github.com/weex-plugins/amap-running-app/blob/master/src/simple.we)
 
 ### 打包运行
 
@@ -456,10 +456,6 @@ countDownTime() {
 ``` bash
 weex run android
 ```
-
-运行的界面截图：
-
-
 
 
 

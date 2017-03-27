@@ -4,10 +4,6 @@
       <weex-amap-polyline path="{{polylinePath}}" stroke-opacity="0.9"  stroke-style="solid" stroke-width="8" stroke-color="#1ba1e2"></weex-amap-polyline>
     </weex-amap>
     <div class="map-controller" if="{{status!=4}}">
-      <div class="distance-wrap">
-        <text class="distance">{{runningData.miles}}</text>
-        <text class="unit">公里</text>
-      </div>
       <div class="dashboard">
         <div class="dashboard-item">
           <div class="time-wrap">
@@ -16,12 +12,12 @@
           </div>
         </div>
         <div class="dashboard-item">
-          <text class="dashboard-title">配速</text>
+          <text class="dashboard-title">速度</text>
           <text class="number-lg">{{runningData.speed}}</text>
         </div>
         <div class="dashboard-item">
-          <text class="dashboard-title">热量</text>
-          <text class="number-lg">{{runningData.calories}}</text>
+          <text class="dashboard-title">距离</text>
+          <text class="number-lg">{{runningData.miles}}</text>
         </div>
       </div>
       <div class="btn-wrap">
@@ -82,7 +78,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 500;
+    height: 320;
     background-color: rgba(255,255,255,1);
     border-top-width: 2;
     border-top-color: rgba(0,0,0,.25);
@@ -196,7 +192,7 @@
       timeRecorder: null,
       amapRecorder: null,
       // test data
-      test: true,
+      test: false,
       color: '#1ba1e2',
       
     },
