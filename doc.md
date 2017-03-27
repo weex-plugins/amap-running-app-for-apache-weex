@@ -242,7 +242,7 @@ runningData: {
 </template>
 ```
 
-#### 添加地图折线polyline
+### 添加地图折线polyline
 
 ``` weex
 <weex-amap id="map2017" geolocation="true" center="{{pos}}" class="map" sdk-key="{{keys}}" zoom="{{zoom}}">
@@ -250,7 +250,7 @@ runningData: {
 </weex-amap>
 ```
 
-#### 添加流程控制
+### 添加流程控制
 
 在我们进行跑步的过成功无疑就是这么几个状态，我将它定义在了 [status.js](https://github.com/weex-plugins/amap-running-app/blob/master/src/lib/status.js)
 
@@ -456,8 +456,6 @@ countDownTime() {
 ``` bash
 weex run android
 ```
-
-
 
 *PS: 当然如果你要做出一个 科学 的跑步程序，还需要你加入大量测试和数据的纠正，比如我们在使用过程会遇到定位的偏差，断网， 用户没有开启定位权限等问题，这些都是我们需要考虑和应对的*
 
