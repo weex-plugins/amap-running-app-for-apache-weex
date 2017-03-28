@@ -38,17 +38,22 @@ weex run android
 ``` bash
 weex create runningapp
 cd runningapp && npm install
-# 安装百分比圆圈组件
-npm install weex-percentage-circle --save
 weex platform add android
 weex plugin add weex-amap
 weexpack run android
 
 ```
 
-### 运行demo
+### 运行demo截图
 
-<img width="320" src="https://gw.alicdn.com/tfs/TB1gi2jQXXXXXb5aFXXXXXXXXXX-480-776.gif" />
+**iOS 版**
+
+<img src="https://gw.alicdn.com/tfs/TB1xKpkQpXXXXX.XVXXXXXXXXXX-640-1136.png"/>
+ 
+
+**Android 版**
+
+<img src="https://gw.alicdn.com/tfs/TB1KwM_QXXXXXcBaXXXXXXXXXXX-720-1280.png"/>
 
 
 *截图数据仅供演示*
