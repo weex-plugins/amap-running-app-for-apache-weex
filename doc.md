@@ -8,7 +8,14 @@ Weex 给大家带来的无疑是客户端开发效率的提升，我们可以通
 
 首先我们先来看下运行的效果吧:
 
-<img src="https://gw.alicdn.com/tfs/TB1XfMFQXXXXXboaFXXXXXXXXXX-480-798.gif"/>
+**iOS 版**
+
+<img src="https://gw.alicdn.com/tfs/TB1xKpkQpXXXXX.XVXXXXXXXXXX-640-1136.png"/>
+ 
+
+**Android 版**
+
+<img src="https://gw.alicdn.com/tfs/TB1KwM_QXXXXXcBaXXXXXXXXXXX-720-1280.png"/>
 
 *截图数据仅供参考*
 
@@ -408,7 +415,7 @@ calcDistanceAndSpeed() {
 其中 utils.js 的实现可以参考 [这里](https://github.com/weex-plugins/amap-running-app/blob/master/src/lib/utils.js)。
 
 
-### 让程序自动跑起来
+### 让程序自动采集数据
 
 大家写JS一定都实现过一个倒计时的程序，常用的解决方案就是 `setInterval` (关于setInterval 时间的执行的问题可以看[这里](http://javascript.info/tutorial/settimeout-setinterval)) 。
 
@@ -494,10 +501,8 @@ weex plugin add weex-amap
 weex run android
 ```
 
-
 [amap-running-app](https://github.com/weex-plugins/amap-running-app),也欢迎PR，拍砖。
   
-
 
 ### 扩展阅读
 
@@ -505,4 +510,3 @@ weex run android
 
 + [跑步消耗卡路里的计算公式、指数K是怎么计算的](https://zhidao.baidu.com/question/129562286.html)
 
-+ 
