@@ -18,7 +18,7 @@ git clone https://github.com/weex-plugins/amap-running-app
 3.测试你的需要运行的平台，比如android 或者 ios
 
 ``` bash
-weex plaform add android
+weex platform add android
 ```
 
 4.添加插件 [weex-amap](https://github.com/weex-plugins/weex-amap)
